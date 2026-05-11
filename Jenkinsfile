@@ -11,19 +11,19 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'echo Building application...'
+                sh 'echo Building app'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'echo Tests passed'
+                sh 'echo Tests OK'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'echo Deploy step simulated'
+                echo 'Deploying to second EC2 via SSH'
             }
         }
     }
