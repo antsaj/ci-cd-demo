@@ -21,14 +21,15 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sh '''
-                ssh -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "pkill node || true"
-                scp -o StrictHostKeyChecking=no app.js ubuntu@13.218.68.232:/home/ubuntu/app/
-                ssh -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "cd /home/ubuntu/app && nohup node app.js > output.log 2>&1 &"
-                '''
-            }
-        }
+		stage('Deploy') 
+			{ steps { 
+				sh ''' 
+				ssh -i /var/jenkins_home/.ssh/id_ed25519 -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "pkill node || true" 
+				scp -i /var/jenkins_home/.ssh/id_ed25519 -o StrictHostKeyChecking=no app.js ubuntu@13.218.68.232:/home/ubuntu/app/ 
+				ssh -i /var/jenkins_home/.ssh/id_ed25519 -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "cd /home/ubuntu/app && nohup node app.js > output.log 2>&1 &" 
+				''' 
+			} 
+		}
+
     }
 }
