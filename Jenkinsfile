@@ -21,15 +21,14 @@ pipeline {
             }
         }
 
-		stage('Debug SSH') {
-    steps {
-        sh '''
-        whoami
-        ls -la ~/.ssh || true
-        ssh -v ubuntu@13.218.68.232 "echo OK"
-        '''
-    }
-}
+		stage('Deploy') 
+			{ steps { 
+				sh ''' ssh -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "pkill node || true" 
+				scp -o StrictHostKeyChecking=no app.js ubuntu@13.218.68.232:/home/ubuntu/app/ 
+				ssh -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "cd /home/ubuntu/app && nohup node app.js > output.log 2>&1 &" 
+				''' 
+			} 
+		}
 
     }
 }
