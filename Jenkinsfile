@@ -1,4 +1,10 @@
-```groovy id="good"
+
+---
+
+# 🎯 JENKINSFILE MORA POČINJATI OVAKO
+
+:::writing{variant="standard" id="52814"}
+```groovy id="real"
 pipeline {
     agent any
 
@@ -33,4 +39,3 @@ pipeline {
         }
     }
 }
-```
