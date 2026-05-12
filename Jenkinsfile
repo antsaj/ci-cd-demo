@@ -1,3 +1,4 @@
+```groovy id="good"
 pipeline {
     agent any
 
@@ -22,13 +23,14 @@ pipeline {
         }
 
         stage('Deploy') {
-    steps {
-        sh '''
-        ssh ubuntu@13.218.68.232 "pkill node || true"
-        scp app.js ubuntu@13.218.68.232:/home/ubuntu/app/
-        ssh ubuntu@13.218.68.232 "cd /home/ubuntu/app && nohup node app.js > output.log 2>&1 &"
-        '''
+            steps {
+                sh '''
+                ssh -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "pkill node || true"
+                scp -o StrictHostKeyChecking=no app.js ubuntu@13.218.68.232:/home/ubuntu/app/
+                ssh -o StrictHostKeyChecking=no ubuntu@13.218.68.232 "cd /home/ubuntu/app && nohup node app.js > output.log 2>&1 &"
+                '''
+            }
+        }
     }
 }
-    }
-}
+```
